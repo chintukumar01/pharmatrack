@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - PharmaTrack</title>
+    <link rel="stylesheet" href="/static/admin.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>🏥 PharmaTrack</h2>
+                <p id="admin-email"></p>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#offline-sales" class="nav-item active" data-section="offline-sales">
+                    <span>💵</span> Offline Sales & Billing
+                </a>
+                <a href="#appointments" class="nav-item" data-section="appointments">
+                    <span>📅</span> Appointments
+                </a>
+                <a href="#orders" class="nav-item" data-section="orders">
+                    <span>📦</span> Orders
+                </a>
+                <a href="#inventory" class="nav-item" data-section="inventory">
+                    <span>💊</span> Inventory
+                </a>
+                <a href="#analytics" class="nav-item" data-section="analytics">
+                    <span>📊</span> Sales Analytics
+                </a>
+                <a href="#" class="nav-item logout" id="logout-btn">
+                    <span>🚪</span> Logout
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="content-header">
+                <h1 id="section-title">Offline Sales & Billing</h1>
+                <div class="header-actions">
+                    <button class="btn-primary" id="refresh-btn">🔄 Refresh</button>
+                </div>
+            </header>
+
+            <!-- Dashboard Stats -->
+            <section id="dashboard-stats" class="stats-container">
+                <div class="stat-card">
+                    <h3>Today's Revenue</h3>
+                    <p class="stat-value" id="stat-revenue">₹0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Today's Orders</h3>
+                    <p class="stat-value" id="stat-orders">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Low Stock Items</h3>
+                    <p class="stat-value alert" id="stat-low-stock">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Pending Appointments</h3>
+                    <p class="stat-value" id="stat-appointments">0</p>
+                </div>
+            </section>
+
+            <!-- Offline Sales Section -->
+            <section id="offline-sales-section" class="content-section active">
+                <div class="section-header">
+                    <h2>Create New Sale</h2>
+                </div>
+                
+                <div class="billing-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Customer Name (Optional)</label>
+                            <input type="text" id="customer-name" placeholder="Enter customer name">
+                        </div>
+                        <div class="form-group">
+                            <label>Customer Phone (Optional)</label>
+                            <input type="text" id="customer-phone" placeholder="Enter phone number">
+                        </div>
+                    </div>
+
+                    <div class="medicine-selection">
+                        <h3>Add Medicines</h3>
+                        <div class="form-row">
+                            <div class="form-group flex-2">
+                                <label>Medicine</label>
+                                <select id="medicine-select">
+                                    <option value="">Select Medicine</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Quantity</label>
+                                <input type="number" id="medicine-quantity" min="1" value="1">
+                            </div>
+                            <div class="form-group">
+                                <label>&nbsp;</label>
+                                <button type="button" class="btn-secondary" id="add-medicine-btn">Add</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="billing-items">
+                        <h3>Bill Items</h3>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Medicine</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Subtotal</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="bill-items-body">
+                                <tr class="empty-state">
+                                    <td colspan="5">No items added yet</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="billing-summary">
+                        <div class="summary-row">
+                            <span>Subtotal:</span>
+                            <span id="bill-subtotal">₹0.00</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Tax (5%):</span>
+                            <span id="bill-tax">₹0.00</span>
+                        </div>
+                        <div class="summary-row total">
+                            <span>Total:</span>
+                            <span id="bill-total">₹0.00</span>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Payment Mode</label>
+                            <select id="payment-mode">
+                                <option value="Cash">Cash</option>
+                                <option value="Card">Card</option>
+                                <option value="UPI">UPI</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn-primary btn-large" id="complete-sale-btn">Complete Sale</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-header mt-4">
+                    <h2>Recent Sales</h2>
+                </div>
+                <div class="table-container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Invoice #</th>
+                                <th>Customer</th>
+                                <th>Items</th>
+                                <th>Total</th>
+                                <th>Payment</th>
+                                <th>Date</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="offline-sales-body">
+                            <tr class="loading-state">
+                                <td colspan="6">Loading...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Appointments Section -->
+            <section id="appointments-section" class="content-section">
+                <div class="section-header">
+                    <h2>Appointment Management</h2>
+                    <div class="filters">
+                        <select id="appointment-status-filter">
+                            <option value="">All Status</option>
+                            <option value="Pending">Pending</option>
+                            <option value="Approved">Approved</option>
+                            <option value="Rejected">Rejected</option>
+                            <option value="Completed">Completed</option>
+                        </select>
+                        <input type="date" id="appointment-date-filter">
+                    </div>
+                </div>
+                
+                <div class="table-container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Patient Email</th>
+                                <th>Doctor</th>
+                                <th>Specialization</th>
+                                <th>Date & Time</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="appointments-body">
+                            <tr class="loading-state">
+                                <td colspan="7">Loading...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Orders Section -->
+            <section id="orders-section" class="content-section">
+                <div class="section-header">
+                    <h2>Order Management</h2>
+                    <div class="filters">
+                        <select id="order-status-filter">
+                            <option value="">All Status</option>
+                            <option value="Placed">Placed</option>
+                            <option value="Packed">Packed</option>
+                            <option value="Shipped">Shipped</option>
+                            <option value="Delivered">Delivered</option>
+                            <option value="Cancelled">Cancelled</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="table-container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Order #</th>
+                                <th>Customer</th>
+                                <th>Items</th>
+                                <th>Amount</th>
+                                <th>Payment</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="orders-body">
+                            <tr class="loading-state">
+                                <td colspan="8">Loading...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Inventory Section -->
+            <section id="inventory-section" class="content-section">
+                <div class="section-header">
+                    <h2>Inventory Management</h2>
+                    <div class="header-actions">
+                        <input type="text" id="inventory-search" placeholder="Search medicines..." style="padding: 10px; border: 2px solid #e5e7eb; border-radius: 8px; margin-right: 10px; width: 250px;">
+                        <button class="btn-primary" id="add-medicine-modal-btn">+ Add Medicine</button>
+                        <button class="btn-secondary" id="low-stock-filter-btn">⚠️ Low Stock</button>
+                    </div>
+                </div>
+                
+                <div class="table-container">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Category</th>
+                                <th>Price</th>
+                                <th>Stock</th>
+                                <th>Manufacturer</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="inventory-body">
+                            <tr class="loading-state">
+                                <td colspan="7">Loading...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Analytics Section -->
+            <section id="analytics-section" class="content-section">
+                <div class="section-header">
+                    <h2>Sales Analytics</h2>
+                    <div class="filters">
+                        <select id="analytics-period">
+                            <option value="daily">Daily</option>
+                            <option value="weekly">Weekly</option>
+                            <option value="monthly">Monthly</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="analytics-grid">
+                    <div class="analytics-card">
+                        <h3>Total Revenue</h3>
+                        <p class="analytics-value" id="analytics-total-revenue">₹0</p>
+                    </div>
+                    <div class="analytics-card">
+                        <h3>Online Revenue</h3>
+                        <p class="analytics-value" id="analytics-online-revenue">₹0</p>
+                    </div>
+                    <div class="analytics-card">
+                        <h3>Offline Revenue</h3>
+                        <p class="analytics-value" id="analytics-offline-revenue">₹0</p>
+                    </div>
+                </div>
+
+                <div class="analytics-section">
+                    <h3>Payment Mode Split</h3>
+                    <div id="payment-split-container" class="chart-container"></div>
+                </div>
+
+                <div class="analytics-section">
+                    <h3>Top Selling Medicines</h3>
+                    <div class="table-container">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Medicine</th>
+                                    <th>Quantity Sold</th>
+                                    <th>Revenue</th>
+                                </tr>
+                            </thead>
+                            <tbody id="top-medicines-body">
+                                <tr class="loading-state">
+                                    <td colspan="3">Loading...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Medicine Modal -->
+    <div id="medicine-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">Add Medicine</h2>
+                <span class="close">&times;</span>
+            </div>
+            <form id="medicine-form">
+                <input type="hidden" id="medicine-id">
+                <div class="form-group">
+                    <label>Name *</label>
+                    <input type="text" id="med-name" required>
+                </div>
+                <div class="form-group">
+                    <label>Category *</label>
+                    <input type="text" id="med-category" required>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea id="med-description" rows="3"></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Price (₹) *</label>
+                        <input type="number" id="med-price" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Stock *</label>
+                        <input type="number" id="med-stock" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Low Stock Threshold</label>
+                        <input type="number" id="med-threshold" value="10">
+                    </div>
+                    <div class="form-group">
+                        <label>Manufacturer</label>
+                        <input type="text" id="med-manufacturer">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-secondary" id="cancel-modal-btn">Cancel</button>
+                    <button type="submit" class="btn-primary">Save Medicine</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="/static/admin.js"></script>
+</body>
+</html>

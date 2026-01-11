@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Orders - PharmaTrack</title>
+    <link rel="stylesheet" href="/static/user.css?v=3.0">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <h1>🏥 PharmaTrack</h1>
+            </div>
+            <div class="nav-links">
+                <a href="/static/user.html">Home</a>
+                <a href="/static/cart.html">🛒 Cart (<span id="cart-count">0</span>)</a>
+                <a href="/static/orders.html" class="active">My Orders</a>
+                <a href="/static/appointments.html">Appointments</a>
+                <a href="#" id="logout-link">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header class="page-header">
+            <h2>My Orders</h2>
+            <p>Track your order history</p>
+        </header>
+
+        <div id="orders-list" class="orders-list">
+            <div class="loading">Loading orders...</div>
+        </div>
+    </div>
+
+    <script src="/static/orders.js"></script>
+</body>
+</html>

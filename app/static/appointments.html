@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointments - PharmaTrack</title>
+    <link rel="stylesheet" href="/static/user.css?v=3.0">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <h1>🏥 PharmaTrack</h1>
+            </div>
+            <div class="nav-links">
+                <a href="/static/user.html">Home</a>
+                <a href="/static/cart.html">🛒 Cart (<span id="cart-count">0</span>)</a>
+                <a href="/static/orders.html">My Orders</a>
+                <a href="/static/appointments.html" class="active">Appointments</a>
+                <a href="#" id="logout-link">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header class="page-header">
+            <h2>Doctor Appointments</h2>
+            <button class="btn-primary" id="book-appointment-btn">+ Book Appointment</button>
+        </header>
+
+        <div id="appointments-list" class="appointments-list">
+            <div class="loading">Loading appointments...</div>
+        </div>
+
+        <!-- Appointment Modal -->
+        <div id="appointment-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Book Appointment</h2>
+                    <span class="close">&times;</span>
+                </div>
+                <form id="appointment-form">
+                    <div class="form-group">
+                        <label>Doctor *</label>
+                        <select id="doctor-select" required>
+                            <option value="">Select Doctor</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Appointment Date *</label>
+                        <input type="date" id="appointment-date" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Appointment Time *</label>
+                        <select id="appointment-time" required>
+                            <option value="09:00 AM">09:00 AM</option>
+                            <option value="10:00 AM">10:00 AM</option>
+                            <option value="11:00 AM">11:00 AM</option>
+                            <option value="12:00 PM">12:00 PM</option>
+                            <option value="02:00 PM">02:00 PM</option>
+                            <option value="03:00 PM">03:00 PM</option>
+                            <option value="04:00 PM">04:00 PM</option>
+                            <option value="05:00 PM">05:00 PM</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Notes (Optional)</label>
+                        <textarea id="appointment-notes" rows="3" placeholder="Any specific concerns or symptoms"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn-secondary" id="cancel-appointment">Cancel</button>
+                        <button type="submit" class="btn-primary">Book Appointment</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/appointments.js"></script>
+</body>
+</html>

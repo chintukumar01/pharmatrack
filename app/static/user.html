@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PharmaTrack - Home</title>
+    <link rel="stylesheet" href="/static/user.css?v=3.0">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <h1>🏥 PharmaTrack</h1>
+            </div>
+            <div class="nav-links">
+                <a href="/static/user.html" class="active">Home</a>
+                <a href="/static/cart.html">🛒 Cart (<span id="cart-count">0</span>)</a>
+                <a href="/static/orders.html">My Orders</a>
+                <a href="/static/appointments.html">Appointments</a>
+                <a href="#" id="logout-link">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header class="page-header">
+            <h2>Browse Medicines</h2>
+            <p>Find and order medicines online</p>
+        </header>
+
+        <div class="search-section">
+            <input type="text" id="search-input" placeholder="Search medicines..." class="search-input">
+            <select id="category-filter" class="category-select">
+                <option value="">All Categories</option>
+            </select>
+        </div>
+
+        <div id="medicines-grid" class="medicines-grid">
+            <div class="loading">Loading medicines...</div>
+        </div>
+    </div>
+
+    <script src="/static/user.js"></script>
+</body>
+</html>
