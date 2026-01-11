@@ -599,7 +599,7 @@ This project is open-source and available under the MIT License.
 
 ## 👨‍💻 Developer
 
-Developed with ❤️ by **Ch. Shiva**
+Developed as part of final year porject by **pankaj kumar behuria(fortend), chelluru s kumar bramham(backend)**
 
 **Tech Stack:** FastAPI, SQLAlchemy, SQLite, Vanilla JS, HTML5, CSS3
 
