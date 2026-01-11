@@ -4,62 +4,88 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - PharmaTrack</title>
-    <link rel="stylesheet" href="login.css?v=2.0">
+    <link rel="stylesheet" href="login.css?v=4.0">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-
-    <div class="login-container">
-        <div class="login-logo">
-            🏥
+    <div class="login-wrapper">
+        <!-- Left Side - Hero Section -->
+        <div class="hero-section">
+            <div class="hero-content">
+                <div class="hero-logo">🏥</div>
+                <h1>PharmaTrack</h1>
+                <p>Comprehensive Pharmacy Management System<br>Streamline your operations with our intuitive platform</p>
+            </div>
         </div>
         
-        <div class="login-header">
-            <h2>Welcome to PharmaTrack</h2>
-            <p>Sign in to access your pharmacy dashboard</p>
-        </div>
-
-        <form id="loginForm" onsubmit="return false;">
-            <div class="input-group">
-                <label for="email">Email Address</label>
-                <input 
-                    type="email" 
-                    id="email" 
-                    placeholder="your.email@example.com"
-                    autocomplete="email"
-                    required
-                >
-                <span class="error-msg" id="emailError"></span>
-            </div>
-
-            <button type="button" id="sendOtpBtn" class="primary-btn">
-                Send OTP
-            </button>
-
-            <div class="otp-container" id="otpContainer">
-                <div class="input-group">
-                    <label for="otp">Verification Code</label>
-                    <input 
-                        type="text" 
-                        id="otp" 
-                        placeholder="Enter 6-digit OTP" 
-                        maxlength="6" 
-                        inputmode="numeric"
-                        pattern="[0-9]{6}"
-                        autocomplete="one-time-code"
-                    >
-                    <span class="error-msg" id="otpError"></span>
-                    <span class="success-msg" id="otpSuccess"></span>
+        <!-- Right Side - Login Form -->
+        <div class="form-section">
+            <div class="login-container">
+                <div class="login-logo">
+                    🏥
+                </div>
+                
+                <div class="login-header">
+                    <h2>Welcome Back</h2>
+                    <p>Sign in to your account to continue</p>
                 </div>
 
-                <button type="button" id="verifyBtn" class="primary-btn">
-                    Verify & Login
-                </button>
+                <form id="loginForm" onsubmit="return false;">
+                    <div class="input-group">
+                        <label for="email">Email Address</label>
+                        <div class="input-wrapper">
+                            <span class="input-icon">✉️</span>
+                            <input 
+                                type="email" 
+                                id="email" 
+                                placeholder="Enter your email"
+                                autocomplete="email"
+                                required
+                            >
+                        </div>
+                        <span class="error-msg" id="emailError"></span>
+                    </div>
+
+                    <button type="button" id="sendOtpBtn" class="primary-btn">
+                        Send OTP
+                    </button>
+
+                    <div class="divider">OR</div>
+
+                    <!-- <button type="button" class="google-btn">
+                        <span>oogle</span>
+                        Sign in with Google
+                    </button> -->
+
+                    <div class="otp-container" id="otpContainer">
+                        <div class="input-group">
+                            <label for="otp">Verification Code</label>
+                            <div class="input-wrapper">
+                                <span class="input-icon">🔢</span>
+                                <input 
+                                    type="text" 
+                                    id="otp" 
+                                    placeholder="Enter 6-digit OTP" 
+                                    maxlength="6" 
+                                    inputmode="numeric"
+                                    pattern="[0-9]{6}"
+                                    autocomplete="one-time-code"
+                                >
+                            </div>
+                            <span class="error-msg" id="otpError"></span>
+                            <span class="success-msg" id="otpSuccess"></span>
+                        </div>
+
+                        <button type="button" id="verifyBtn" class="primary-btn">
+                            Verify & Login
+                        </button>
+                    </div>
+                </form>
+                
+                <div class="footer-text">
+                    🔒 Secure Login System • PharmaTrack © 2026
+                </div>
             </div>
-        </form>
-        
-        <div class="footer-text">
-            🔒 Secure Login System • PharmaTrack © 2026
         </div>
     </div>
 

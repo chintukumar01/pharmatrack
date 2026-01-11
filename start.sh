@@ -7,4 +7,4 @@ python create_table.py
 python seed_data.py
 
 # Start the server
-uvicorn app.main:app --host 0.0.0.0 --port $PORT
+exec uvicorn app.main:app --host 0.0.0.0 --port $PORT
